@@ -1,0 +1,28 @@
+
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container">
+		
+			<ul class="nav">
+				<li><a href="./home.html">Home</a></li>
+				<c:if test="${!empty usersession}">
+					<c:if test="${userrole == 'ROLE_SELLER'}">
+						<li><a href="./bookform.html">add Books</a></li>
+					</c:if>
+					<li><a href="./bookshelf.html">Books</a></li>
+					<li><a href="./logout.html">Logout</a></li>
+					<li float:right><a href="./viewbasket.html">Items in Basket: 
+						<c:choose> 
+							<c:when test="${empty baskettotal}">
+								<c:out value="0"/>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${baskettotal}"/>
+							</c:otherwise>
+						</c:choose>
+					</a></li>
+				</c:if>
+			</ul>
+		</div>
+	</div>
+</div>

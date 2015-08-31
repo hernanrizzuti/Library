@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<context:annotation-config />
+	<aop:aspectj-autoproxy />
+	
+	<bean id="basketCalculator" class="com.fdm.model.service.BasketCalculator"/>
+	<bean id="imageIO" class="com.fdm.model.service.ImageIO"/>
+	<bean id="user" class="com.fdm.model.User"/>
+	<bean id="hashPassword" class="com.fdm.model.service.HashPassword" />
+	<bean id="userFactory" class="com.fdm.model.service.UserFactory" />
+	<bean id="userValidator" class="com.fdm.model.validation.UserValidator"/>
+	<bean id="extBook" class="com.fdm.model.ExtBook" />
+	<bean id="arraylist" class="java.util.ArrayList"/>
+	<bean id="hashmap" class="java.util.HashMap" scope="prototype"/>
+	<bean id="registerValidation" class="com.fdm.model.validation.RegisterValidation" />
+	<bean id="bookcopiesmap" class="java.util.HashMap" />
+	<bean id="booknameAndPrice" class="java.util.HashMap" />
+	<bean id="bookstorage" class="com.fdm.model.BookStorage" />
+	<bean id="bookdao" class="com.fdm.model.dbstorage.BookDAO" />
+	<bean id="userdao" class="com.fdm.model.dbstorage.UserDAO" />
+	<bean id="basketStorage" class="com.fdm.model.storage.BasketStorage">
+		<property name="itemMap" ref="hashmap" />
+	</bean>
+	<bean id="librarySearchDAO" class="com.fdm.model.dbstorage.LibrarySearchDAO"/>
+	<bean id="basketdao" class="com.fdm.model.dbstorage.BasketDAO"/>
+	<bean id="sqltojson" class="com.fdm.model.SQLtoJSON" />
+	<bean id="jsonbuildercontroller" class="com.fdm.model.service.JsonBuilderController"/>
+	<bean id="basketSessionController" class="com.fdm.model.service.BasketSessionController"/>
+	<bean class="org.springframework.context.support.ResourceBundleMessageSource"
+		id="messageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/Library" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="2" />
+	</bean>
+	
+</beans>

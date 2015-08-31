@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+							http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+						http://www.springframework.org/schema/security
+						http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+						
+<context:component-scan base-package="com.fdm.controller"/> 
+
+<!-- <beans:bean id="userDetailsService" class="com.fdm.model.dbstorage.UserDetailsServiceDAO"/>
+ -->
+<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	<beans:property name="url" value="jdbc:mysql://localhost:3306/Library" />
+	<beans:property name="username" value="root" />
+	<beans:property name="password" value="" />
+	<beans:property name="initialSize" value="1" />
+	<beans:property name="maxActive" value="2" />
+</beans:bean>
+
+<http auto-config="true" access-denied-page="/" use-expressions="true">
+	<intercept-url pattern="/home.html" access="hasAnyRole('ROLE_USER', 'ROLE_SELLER')" />
+	<intercept-url pattern="/bookform.html" access="hasRole('ROLE_SELLER')" />
+	<intercept-url pattern="/bookshelf.html" access="hasAnyRole('ROLE_USER', 'ROLE_SELLER')" />
+	
+	<form-login login-processing-url="/j_spring_security_check"
+		login-page="/" default-target-url="/home.html"
+		authentication-failure-url="/" />
+	<logout invalidate-session="true" logout-success-url="/" />
+</http>
+
+	
+<authentication-manager>
+	<authentication-provider>
+		<jdbc-user-service id="userService"
+			data-source-ref="dataSource"
+			users-by-username-query="select username, password, enabled from libusers where username=?"
+			authorities-by-username-query="select username, authority from libuser_roles where username=?" />
+		</authentication-provider>
+	</authentication-manager>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="userService">
+			<password-encoder hash="md5" base64="true" />
+		</authentication-provider>
+	</authentication-manager>
+
+<!-- 	<beans:bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="userDetailsService" />
+	</beans:bean>
+
+<beans:bean id="authenticationManager"
+		class="org.springframework.security.authentication.ProviderManager">
+		<beans:property name="providers">
+			<beans:list>
+				<beans:ref local="daoAuthenticationProvider" />
+			</beans:list>
+		</beans:property>
+	</beans:bean> -->
+	
+
+</beans:beans>
