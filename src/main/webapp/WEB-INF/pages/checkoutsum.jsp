@@ -56,7 +56,7 @@ div.a, div.b, div.c
 <p><b>Total number of items:</b><c:out value=" ${ItemTotal}"/></p>
 <p><b>Total Price:</b><c:out value=" £${priceTotal}"/> </p>
 
-<a href="payment.html">Continue to Payment</a>
+<a href="paymentmethods.html">Continue to Payment Method</a>
 
 </body>
 </html>

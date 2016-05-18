@@ -5,32 +5,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BookShelf</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main.css" />
-<script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script	src="<%=request.getContextPath()%>/resources/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" ></script>
+ <script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+<title>Your Account</title>
 </head>
 <body>
 <div class="container">
 <%@ include file="menu.html" %>
-<table class="table table-striped table-bordered">
 
-<th>Book</th><th>Quantity</th>
-<c:forEach var="tc" items="${titleCopies}">
-<tr>
-	<td>
-    		${tc.key}
-    </td>
-    	<td>
-    		${tc.value}
-    </td>
-    </tr>
-</c:forEach>
+<h4>Payment Methods</h4>
+<ul>
+<li><a href="currentorders.html">Current Placed orders</a></li>
+<li><a href="ordershistory.html">Orders History</a></li>
+</ul>
+<h4>Account Settings</h4>
+<ul>
+<li><a href="changes.html">Change Name, E-mail Address, or Password</a></li>
+</ul>
 
-</table>
+
 </div>
 </body>
 </html>

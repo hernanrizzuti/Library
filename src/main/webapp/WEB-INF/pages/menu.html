@@ -2,7 +2,6 @@
 <div class="navbar">
 	<div class="navbar-inner">
 		<div class="container">
-		
 			<ul class="nav">
 				<li><a href="./home.html">Home</a></li>
 				<c:if test="${!empty usersession}">
@@ -10,9 +9,9 @@
 						<li><a href="./bookform.html">add Books</a></li>
 					</c:if>
 					<li><a href="./bookshelf.html">Books</a></li>
-					<li><a href="./logout.html">Logout</a></li>
+					<li><a href="./account.html">Your Account</a></li>
 					<li float:right><a href="./viewbasket.html">Items in Basket: 
-						<c:choose> 
+						<c:choose>
 							<c:when test="${empty baskettotal}">
 								<c:out value="0"/>
 							</c:when>
@@ -21,8 +20,11 @@
 							</c:otherwise>
 						</c:choose>
 					</a></li>
+					<li><a href="./logout.html">Log off</a></li>
 				</c:if>
+				
 			</ul>
+			<p class="text-right">Logged as <c:out value="${usersession}"/></p>
 		</div>
 	</div>
 </div>

@@ -54,6 +54,7 @@ public class BookDAO {
 			ps.setString(8, book.getCategory());
 			ps.setString(9, book.getDate());
 			ps.setInt(10, book.getCopies());
+			System.out.println(book.getImagepath());
 			ps.setString(11, book.getImagepath());
 			ps.executeUpdate();
 		}finally{

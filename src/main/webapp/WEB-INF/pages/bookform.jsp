@@ -39,62 +39,107 @@
 </head>
 <body>
 <div class="container">
+
 <%@ include file="menu.html" %>
-<f:form name="bookForm" method="POST" action="bookformsubmission.html" commandName="extBook" enctype="multipart/form-data">
-	<p>Title: </p>
-		<f:input path="title" size="50" />
-		<f:errors path="title" cssClass="error" />
-	<br />
-	<p>Author: </p>
-		<select name="author">
+<f:form class="form-horizontal" name="bookForm" method="POST" action="bookformsubmission.html" commandName="extBook" enctype="multipart/form-data">
+<div class="form-group">
+	<label for="title" class="col-sm-2 control-label">Title: </label>
+	<div class="col-sm-10">
+		<f:input id="title" path="title" size="50"/>
+		<f:errors id="title" path="title" cssClass="error"/>
+	</div>
+</div>
+<br />
+<div class="form-group">
+	<label for="author" class="col-sm-2 control-label" >Author: </label>
+	<div class="col-sm-10">
+		<select class="form-control" name="author" id="author">
 			<c:forEach items="${author}" var="a">
 				<option value="${a}">${a}</option>
 			</c:forEach>
 		</select>
-	<br />
-	<p>ISBN: </p>
-		<f:input path="ISBN" size="30" />
-		<f:errors path="ISBN" cssClass="error" />
-	<br />
-	<p>About: </p>
-		<f:textarea path="about" />
-		<f:errors path="about" cssClass="error" />
-	<br />
-		<p>Publisher: </p>
-		<select name="publisher">
+	</div>
+</div>
+<br />
+<div class="form-group">
+	<label for="isbn" class="col-sm-2 control-label">ISBN: </label>
+	<div class="col-sm-10">
+		<f:input id="isbn" path="ISBN" size="30" />
+		<f:errors id="isbn" path="ISBN" cssClass="error" />
+	</div>
+</div>
+<br />
+<div class="form-group">
+	<label for="about" class="col-sm-2 control-label">Summary: </label>
+	<div class="col-sm-10">
+		<f:textarea id="about" class="form-control" rows="3" path="about" />
+		<f:errors id="about" path="about" cssClass="error" />
+	</div>
+</div>
+<br />
+<div class="form-group">
+	<label for="publisher" class="col-sm-2 control-label">Publisher: </label>
+	<div class="col-sm-10">
+		<select class="form-control" id="publisher" name="publisher">
 			<c:forEach items="${publisher}" var="p">
 				<option value="${p}">${p}</option>
 			</c:forEach>
 		</select>
-	<br />
-	<p>Price: </p>
-		<f:input path="price" size="30" />
-		<f:errors path="price" cssClass="error" />
-	<br />
-	<p>Number of Pages: </p>
-		<f:input path="pages" size="30" />
-		<f:errors path="pages" cssClass="error" />
-	<br />
-		<p>Category: </p>
-		<select name="category">
+	</div>
+</div>		
+<br />
+<div class="form-group">
+	<label for="price" class="col-sm-2 control-label">Price: </label>
+	<div class="col-sm-10">
+		<f:input id="price" path="price" size="30" />
+		<f:errors id="price" path="price" cssClass="error" />
+	</div>
+</div>		
+<br />
+<div class="form-group">
+	<label for="pages" class="col-sm-2 control-label">Total Pages: </label>
+		<div class="col-sm-10">
+		<f:input id="pages" path="pages" size="30" />
+		<f:errors id="pages" path="pages" cssClass="error" />
+	</div>
+</div>		
+<br />
+<div class="form-group">
+	<label for="category" class="col-sm-2 control-label">Category: </label>
+		<div class="col-sm-10">
+		<select id="category" class="form-control" name="category">
 			<c:forEach items="${category}" var="c">
 				<option value="${c}">${c}</option>
 			</c:forEach>
 		</select>
-	<br />
-		<p>Published On: </p>
-		<f:input path="date" size="30" value="dd/mm/yyyy" id="datepicker"/>
-		<f:errors path="date" cssClass="error" />
-	<br />
-	<p>Number of copies: </p>
-		<f:input path="copies" size="30" />
-		<f:errors path="copies" cssClass="error" />
-	<br />
-	<p>Book image: </p>
-	<input type="file" name="file">
-	<f:errors path="pages" cssClass="error" /><br />
-	
-	<input type="submit" value="Submit" />
+	</div>
+</div>		
+<br />
+<div class="form-group">
+	<label for="datepicker" class="col-sm-2 control-label">Published On: </label>
+		<div class="col-sm-10">
+		<f:input id="datepicker" path="date" size="30" value="dd/mm/yyyy" />
+		<f:errors id="datepicker" path="date" cssClass="error" />
+	</div>
+</div>		
+<br />
+<div class="form-group">
+	<label for="copies" class="col-sm-2 control-label">Total copies: </label>
+		<div class="col-sm-10">
+		<f:input id="copies" path="copies" size="30" />
+		<f:errors id="copies" path="copies" cssClass="error" />
+	</div>
+</div>		
+<br />
+<div class="form-group">
+	<label for="file" class="col-sm-2 control-label">Image: </label>
+		<div class="col-sm-10">
+		<input type="file" id="file" name="file">
+		<f:errors id="file" path="imagepath" cssClass="error" /><br />
+		</div>
+</div>		
+<br />
+	<input type="submit" class="btn btn-primary" value="Submit" />
 </f:form>
 </div>
 </body>

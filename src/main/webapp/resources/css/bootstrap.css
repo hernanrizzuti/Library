@@ -82,6 +82,10 @@ a:active {
   outline: 0;
 }
 
+a:right { 
+	text-align:right; 
+	}
+	
 sub,
 sup {
   position: relative;

@@ -52,9 +52,10 @@
 					<input name='j_password' type="password" /><br />
 					<input type="submit" value="Sign in" />
 				</form>
+				<a href="forgottenpassword.html" >Forgot Your Password?</a>
 			</div>
 		</div>
-
+		
 </div>
 </body>
 </html>
