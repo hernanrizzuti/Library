@@ -55,8 +55,8 @@ CREATE TABLE book_category(
 
 
 CREATE TABLE book_stock( /*add auto increment*/
-  book_stock_id INT(10) PRIMARY KEY,
-sbn	VARCHAR(20),
+  book_stock_id INT(10) AUTO_INCREMENT  PRIMARY KEY ,
+isbn	VARCHAR(20),
   book_copies_num INT(20),
   CONSTRAINT b_b_stock_isbn_fk FOREIGN KEY(isbn) REFERENCES books(isbn)
 )
@@ -79,7 +79,7 @@ CREATE TABLE libusers (
   );
 
  CREATE TABLE libuser_roles ( /*add auto increment*/
- 		user_role_id INT(10) PRIMARY KEY,
+ 		user_role_id INT(10) AUTO_INCREMENT  PRIMARY KEY,
     username VARCHAR(100), 
     authority VARCHAR(50),
     CONSTRAINT libusers_libuser_roles_fk FOREIGN KEY(username) REFERENCES libusers(username)
@@ -106,8 +106,7 @@ CREATE TABLE libusers (
 	basket BLOB, 
 	purchase_date DATE
    );
-
-
+   
 
 Insert into ACCOUNTS (ACCOUNTNO,BALANCE) values (1,0);
 
@@ -127,13 +126,13 @@ Insert into AUTHORS (AUTHOR_ID,NAME) values (5,'Alexander Mccall Smith');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (6,'Allen Ginsberg');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (7,'Anaïs Nin');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (7,'AnaÃ”s Nin');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (8,'Anne Frank');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (9,'Anne Rice');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (10,'Antoine De Saint-Exupéry');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (10,'Antoine De Saint-ExupÃˆry');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (11,'Anton Chekhov');
 
@@ -225,7 +224,7 @@ Insert into AUTHORS (AUTHOR_ID,NAME) values (54,'Elie Wiesel');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (55,'Ellen G. White');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (56,'Émile Zola');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (56,'â€¦mile Zola');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (57,'Emily Dickinson');
 
@@ -247,11 +246,11 @@ Insert into AUTHORS (AUTHOR_ID,NAME) values (65,'Fernando Pessoa');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (66,'Frank McCourt');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (67,'Flannery O’Connor');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (67,'Flannery OÃ­Connor');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (68,'Franz Kafka');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (69,'Gabriel García Márquez');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (69,'Gabriel GarcÃŒa MÂ·rquez');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (70,'Geoffrey Chaucer');
 
@@ -271,7 +270,7 @@ Insert into AUTHORS (AUTHOR_ID,NAME) values (77,'Giacomo Leopardi');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (78,'Giovanni Boccaccio');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (79,'Günter Grass');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (79,'GÂ¸nter Grass');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (80,'Gustave Flaubert');
 
@@ -299,7 +298,7 @@ Insert into AUTHORS (AUTHOR_ID,NAME) values (91,'Hermann Hesse');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (92,'Homer');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (93,'Honoré De Balzac');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (93,'HonorÃˆ De Balzac');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (94,'Hunter S. Thompson');
 
@@ -345,7 +344,7 @@ Insert into AUTHORS (AUTHOR_ID,NAME) values (114,'Jeff Kinney');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (115,'Jeffrey Archer');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (116,'Jo Nesbø');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (116,'Jo NesbÂ¯');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (117,'Johann Wolfgang Von Goethe');
 
@@ -369,7 +368,7 @@ Insert into AUTHORS (AUTHOR_ID,NAME) values (126,'Jonathan Swift');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (127,'Jorge Luis Borges');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (128,'José Saramago');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (128,'JosÃˆ Saramago');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (129,'Joseph Conrad');
 
@@ -475,7 +474,7 @@ Insert into AUTHORS (AUTHOR_ID,NAME) values (179,'Paul Auster');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (180,'Paul Celan');
 
-Insert into AUTHORS (AUTHOR_ID,NAME) values (181,'Paul Valéry');
+Insert into AUTHORS (AUTHOR_ID,NAME) values (181,'Paul ValÃˆry');
 
 Insert into AUTHORS (AUTHOR_ID,NAME) values (182,'Paulo Coelho');
 
@@ -1188,7 +1187,7 @@ Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (3,'Ace Books');
 
 Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (4,'Academic Press');
 
-Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (5,'Addison–Wesley');
+Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (5,'AddisonÃ±Wesley');
 
 Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (6,'Adis International');
 
@@ -1200,7 +1199,7 @@ Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (9,'Allen & Unwin');
 
 Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (10,'Alyson Books');
 
-Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (11,'André Deutsch');
+Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (11,'AndrÃˆ Deutsch');
 
 Insert into PUBLISHERS (PUBLISHER_ID,NAME) values (12,'Andrews McMeel Publishing');
 
@@ -1874,8 +1873,28 @@ END//
 DELIMITER ;
 
 -- ------------------------------------------------------
+/*DROP PROCEDURE IF EXISTS GET_LIBUSER;*/
+DELIMITER //
 
+CREATE PROCEDURE GET_LIBUSER(IN username_in VARCHAR(50))
+BEGIN
+SELECT
+      lu.username,
+      lu.password,
+      lt.title,
+      lu.firstname,
+      lu.lastname,
+      lu.email
+FROM
+      libusers lu
+JOIN libuser_titles lt on lu.title_id = lt.title_id 
+WHERE username=username_in;
 
+END//
+
+DELIMITER ;
+
+---------------------------------------------------------
 
 DELIMITER //
 

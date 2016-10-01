@@ -5,10 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-
 import com.fdm.model.User;
 
 public class UserDAO {
@@ -29,7 +27,7 @@ public class UserDAO {
 			cs = conn.prepareCall("{call ADD_LIBUSER(?,?,?,?,?,?,?,?)}");
 			cs.setString(1, user.getUsername());
 			cs.setString(2, user.getPassword());
-			cs.setInt(3, user.getTitle());
+			cs.setInt(3, user.getTitle_id());
 			cs.setString(4, user.getFirstName());
 			cs.setString(5, user.getLastName());
 			cs.setString(6, user.getEmail());
@@ -57,5 +55,28 @@ public class UserDAO {
 			if(conn!=null)conn.close();
 		}
 		return existingUsername;
+	}
+
+	public User getUser(String username) throws SQLException{
+		conn = datasource.getConnection();
+		cs = conn.prepareCall("{call GET_LIBUSER(?)}");
+		cs.setString(1, username);
+		ResultSet rs = cs.executeQuery();
+		User user = null;
+		try{
+			if (rs.next()){
+				user = new User();
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setTitle(rs.getString("title"));
+				user.setFirstName(rs.getString("firstname"));
+				user.setLastName(rs.getString("lastname"));
+				user.setEmail(rs.getString("email"));
+			}
+		}finally {
+			if(cs!=null)cs.close();
+			if (conn!=null)conn.close();
+		}
+		return user;
 	}
 }

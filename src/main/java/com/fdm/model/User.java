@@ -2,7 +2,8 @@ package com.fdm.model;
 
 public class User {
 	
-	private int title;
+	private int title_id;
+	private String title;
 	private String username;
 	private String password;
 	private String confirmPassword;
@@ -12,10 +13,16 @@ public class User {
 	private int enabled;
 	private String authority;
 
-	public int getTitle() {
+	public int getTitle_id() {
+		return title_id;
+	}
+	public void setTitle_id(int title) {
+		this.title_id = title;
+	}
+	public String getTitle() {
 		return title;
 	}
-	public void setTitle(int title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 	public String getUsername() {

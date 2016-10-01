@@ -10,22 +10,20 @@
  <script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
-<title>Your Account</title>
+<title>My Account Changes</title>
 </head>
 <body>
 <div class="container">
 <%@ include file="menu.html" %>
 
-<h4>Payment Methods</h4>
-<ul>
-<li><a href="currentorders.html">Current Placed orders</a></li>
-<li><a href="ordershistory.html">Orders History</a></li>
-</ul>
-<h4>Account Settings</h4>
-<ul>
-<li><a href="mychanges.html">Change Name, E-mail Address, or Password</a></li>
-</ul>
+<h4>Change details</h4>
 
+
+    		${user.firstName}
+    		${user.lastName}
+    		${user.email}
+    	
+</tr>
 
 </div>
 </body>

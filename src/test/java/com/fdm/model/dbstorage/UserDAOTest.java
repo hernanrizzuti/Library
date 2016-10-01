@@ -90,5 +90,22 @@ public class UserDAOTest {
 		spyuserdao.getRole("hernan");
 		verify(mockrs).getString("authority");
 	}
-
+	
+	@Test
+	public void testgetUserReturnsUserCallsExecuteQuery() throws SQLException{
+		when(mockconn.prepareCall("{call GET_LIBUSER(?)}")).thenReturn(mockcs);
+		when(mockcs.executeQuery()).thenReturn(mockrs);
+		when(mockrs.next()).thenReturn(true);
+		spyuserdao.getUser("username");
+		verify(mockcs).executeQuery();
+	}
+	
+	@Test
+	public void testgetUserReturnsUserWhenAnExistingUsernameIsPassedIn() throws SQLException{
+		when(mockconn.prepareCall("{call GET_LIBUSER(?)}")).thenReturn(mockcs);
+		when(mockcs.executeQuery()).thenReturn(mockrs);
+		when(mockrs.next()).thenReturn(false);
+		spyuserdao.getUser("username");
+		verify(mockrs, never()).getString("username");
+	}
 }

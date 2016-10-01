@@ -24,7 +24,9 @@
 				</c:if>
 				
 			</ul>
+			<c:if test="${!empty usersession}">
 			<p class="text-right">Logged as <c:out value="${usersession}"/></p>
+			</c:if>
 		</div>
 	</div>
 </div>

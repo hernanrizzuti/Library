@@ -7,7 +7,7 @@ import com.fdm.model.User;
 public class UserFactory {
 	
 	public User createUser(User user, HttpServletRequest req){
-		user.setTitle(parseTitle(req.getParameter("title")));
+		user.setTitle_id(parseTitle(req.getParameter("title")));
 		user.setUsername(req.getParameter("username"));
 		user.setPassword(req.getParameter("password"));
 		user.setFirstName(req.getParameter("firstName"));
