@@ -1999,14 +1999,14 @@ legend + .control-group {
 }
 
 table {
-  max-width: 100%;
+  max-width: 50%;
   background-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 .table {
-  width: 100%;
+  width: 50%;
   margin-bottom: 20px;
 }
 

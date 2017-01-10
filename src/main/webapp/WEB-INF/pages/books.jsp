@@ -16,8 +16,8 @@
 <body>
 <div class="container">
 <%@ include file="menu.html" %>
-<table class="table table-striped table-bordered">
-
+<table align="center" class="table table-striped table-bordered">
+<h4 align="center">Bookshelf</h4>	
 <th>Book</th><th>Quantity</th>
 <c:forEach var="tc" items="${titleCopies}">
 <tr>

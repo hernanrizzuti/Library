@@ -19,7 +19,7 @@ public class RegisterValidation extends Validation{
 		if all of the above are true then count will be 4. That way 
 		we can guarantee that all of the values are going to be set 
 		whether they are true or false. So feedback  will be given 
-		to the regform.jsp or any other jsp that uses usernamer...etc.
+		to the regform.jsp or any other jsp that uses username...etc.
 		 */
 		if(count == 4){
 			return true;

@@ -27,6 +27,7 @@ public class ImageFilter implements Filter {
 		String url = req.getRequestURI();
 		String imageurl = URLDecoder.decode(url.substring(url.lastIndexOf("/")+1), "UTF-8");
 		File file = new File("/Library/apache-tomcat-7.0.57/uploads/Library/imgs/",imageurl);
+		//File file = new File("/var/lib/tomcat8/uploads/Library/imgs/",imageurl);
 		resp.setHeader("Content-Type", req.getSession().getServletContext().getMimeType(imageurl));
 		resp.setHeader("Content-Length", String.valueOf(file.length()));
 		resp.setHeader("Content-Disposition", "inline; filename=\"" + imageurl + "\"");
